@@ -1,36 +1,23 @@
 package p2cg;
 
-import java.util.HashSet;
 
 public class Jogo {
 	
 	private String nome;
+	private double preco;
 	private int highScore;
 	private int jogadas;
 	private int finalizado;
 	private String categoria;
-	private HashSet<String> jogabilidade;
 	
 	
-	public Jogo(String nome, String categoria, HashSet<String> jogabilidade) throws Exception{
-	
-		this.testaConstrutor(nome, categoria);
+	public Jogo(String nome, String categoria, double preco) throws Exception{
+		
+		this.testaConstrutor(nome, categoria, preco);
 		
 		this.nome = nome;
 		this.categoria = categoria;
-//		this.jogabilidade = jogabilidade;
-		this.highScore = 0;
-		this.jogadas = 0;
-		this.finalizado = 0;
-		
-	}
-
-	public Jogo(String nome, String categoria) throws Exception{
-		
-		this.testaConstrutor(nome, categoria);
-		
-		this.nome = nome;
-		this.categoria = categoria;
+		this.preco = preco;
 //		this.jogabilidade = new HashSet<String>();
 		this.highScore = 0;
 		this.jogadas = 0;
@@ -40,6 +27,10 @@ public class Jogo {
 
 	public String getNome(){
 		return this.nome;
+	}
+	
+	public double getPreco(){
+		return this.preco;
 	}
 	
 	public String getCategoria(){
@@ -66,9 +57,9 @@ public class Jogo {
 		this.finalizado++;
 	}
 	
-	public HashSet<String> getJogabilidade(){
-		return this.jogabilidade;
-	}
+//	public HashSet<String> getJogabilidade(){
+//		return this.jogabilidade;
+//	}
 	
 	public void registraJogada(int score, boolean finished){
 		
@@ -82,7 +73,7 @@ public class Jogo {
 		
 	}
 
-	private void testaConstrutor(String nome, String categoria) throws Exception{
+	private void testaConstrutor(String nome, String categoria, double preco) throws Exception{
 		
 		if (nome == null || "".equals(nome)){
 			throw new Exception("Nome nao pode ser nulo ou vazio.");
@@ -90,6 +81,10 @@ public class Jogo {
 		
 		if (categoria == null || categoria.equals("")){
 			throw new Exception("Categoria nao pode ser nula ou vazia."); 
+		}
+		
+		if (preco <= 0){
+			throw new Exception("Preco nao pode ser menor ou igual a zero.");
 		}
 		
 		
