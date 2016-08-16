@@ -89,7 +89,20 @@ public class Jogo {
 		if (preco <= 0){
 			throw new Exception("Preco nao pode ser menor ou igual a zero.");
 		}
+	}
+	
+	@Override
+	public String toString(){
+		String menssagem = "";
 		
+		//TODO: finalizar implementação
+		
+//		menssagem += "+ " + this.getNome() + " - Jogo: \n";
+//		menssagem += "==> Jogou " + this.getJogadas() + "vez(es)\n";
+//				"==> Zerou " + this.getFinalizado()  + "vez(es)\n";
+//				==> Maior score: 65478
+		
+		return menssagem;
 		
 	}
 

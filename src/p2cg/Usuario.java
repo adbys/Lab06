@@ -5,7 +5,6 @@ import java.util.HashSet;
 public class Usuario {
 	
 	private String nome;
-	private String login;
 	private HashSet<Jogo> jogosComprados;
 	private double saldo;
 	private int x2p;
@@ -15,7 +14,6 @@ public class Usuario {
 		this.testaConstrutor(nome, login);
 		
 		this.nome = nome;
-		this.login = login;
 		this.saldo = 0.0;
 		this.jogosComprados = new HashSet<Jogo>();
 		this.x2p = 0;
@@ -32,10 +30,6 @@ public class Usuario {
 	
 	public String getNome(){
 		return this.nome;
-	}
-	
-	public String getLogin(){
-		return this.login;
 	}
 	
 	public double getSaldo(){
