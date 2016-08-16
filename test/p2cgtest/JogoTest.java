@@ -31,8 +31,6 @@ public class JogoTest {
 	@Test
 	public void testConstrutor() {
 		
-
-		
 		try{
 			jogo2 = new Jogo("Pokemon", 10.2, jogabilidade);
 		} catch (Exception e){
