@@ -95,12 +95,10 @@ public class Jogo {
 	public String toString(){
 		String menssagem = "";
 		
-		//TODO: finalizar implementação
-		
-//		menssagem += "+ " + this.getNome() + " - Jogo: \n";
-//		menssagem += "==> Jogou " + this.getJogadas() + "vez(es)\n";
-//				"==> Zerou " + this.getFinalizado()  + "vez(es)\n";
-//				==> Maior score: 65478
+		menssagem += "+ " + this.getNome() + " - Jogo: \n";
+		menssagem += "==> Jogou " + this.getJogadas() + "vez(es)\n";
+		menssagem += "==> Zerou " + this.getFinalizado()  + "vez(es)\n";
+		menssagem += "==> Maior score: " + this.getHighScore() + "\n";
 		
 		return menssagem;
 		
