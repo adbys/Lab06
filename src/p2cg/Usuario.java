@@ -58,9 +58,22 @@ public class Usuario {
 		
 		if (login == null || login.equals("")){
 			throw new Exception("Login nao pode ser nulo ou vazio."); 
+		}		
+	}
+	
+	public void registraJogada(String nomeDoJogo, int score, boolean zerou){
+		
+		int x2p = 0; 
+		
+		for(Jogo jogo : this.jogosComprados){
+			
+			if (nomeDoJogo.equals(jogo.getNome())){
+				x2p = jogo.registraJogada(score, zerou);
+			}
+			
 		}
 		
-		
+		this.setX2p(x2p);
 		
 	}
 

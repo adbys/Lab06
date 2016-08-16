@@ -13,11 +13,11 @@ public class Noob extends Usuario {
 		
 	}
 	
-	public void atualizaX2p(double valorGasto) {
-		//TODO: Implementaition unfinished
+	public void atualizaX2p(double precoDoJogo){
 		
-		double novoX2p = this.getX2p() + valorGasto * 10;
+		int pontuacao = (int)(this.getX2p() + precoDoJogo * 10);
 		
+		this.setX2p(pontuacao);
 		
 	}
 	

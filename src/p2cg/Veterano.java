@@ -14,6 +14,14 @@ public class Veterano extends Usuario {
 		
 	}
 	
+	public void atualizaX2p(double precoDoJogo){
+		
+		int pontuacao = (int)(this.getX2p() + precoDoJogo * 15);
+		
+		this.setX2p(pontuacao);
+		
+	}
+	
 	
 
 }

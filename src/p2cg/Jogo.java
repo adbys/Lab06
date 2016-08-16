@@ -1,24 +1,25 @@
 package p2cg;
 
+import java.util.HashSet;
 
 public class Jogo {
 	
 	private String nome;
 	private double preco;
+	private HashSet<Jogabilidade> jogabilidade;
 	private int highScore;
 	private int jogadas;
 	private int finalizado;
 	private String categoria;
 	
 	
-	public Jogo(String nome, String categoria, double preco) throws Exception{
+	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade) throws Exception{
 		
-		this.testaConstrutor(nome, categoria, preco);
+		this.testaConstrutor(nome, preco);
 		
 		this.nome = nome;
-		this.categoria = categoria;
 		this.preco = preco;
-//		this.jogabilidade = new HashSet<String>();
+		this.jogabilidade = new HashSet<Jogabilidade>(jogabilidade);
 		this.highScore = 0;
 		this.jogadas = 0;
 		this.finalizado = 0;
@@ -31,6 +32,10 @@ public class Jogo {
 	
 	public double getPreco(){
 		return this.preco;
+	}
+	
+	public HashSet<Jogabilidade> getJogabilidade(){
+		return this.jogabilidade;
 	}
 	
 	public String getCategoria(){
@@ -56,14 +61,10 @@ public class Jogo {
 	public void setFinalizado(){
 		this.finalizado++;
 	}
-	
-//	public HashSet<String> getJogabilidade(){
-//		return this.jogabilidade;
-//	}
-	
-	public void registraJogada(int score, boolean finished){
 		
-		if (finished == true){
+	public int registraJogada(int score, boolean zerou){
+		
+		if (zerou == true){
 			this.setFinalizado();
 		}
 		
@@ -71,9 +72,11 @@ public class Jogo {
 			this.setHighScore(score);
 		}
 		
+		return 0;
+		
 	}
 
-	private void testaConstrutor(String nome, String categoria, double preco) throws Exception{
+	private void testaConstrutor(String nome, double preco) throws Exception{
 		
 		if (nome == null || "".equals(nome)){
 			throw new Exception("Nome nao pode ser nulo ou vazio.");
