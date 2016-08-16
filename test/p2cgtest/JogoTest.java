@@ -25,6 +25,7 @@ public class JogoTest {
 			fail("Nao deveria lancar excecao");
 		}
 		
+		
 	}
 
 	@Test
@@ -65,7 +66,7 @@ public class JogoTest {
 
 		
 		assertEquals("Nome do jogo esta errado.", "Pokemon", jogo1.getNome());
-		assertEquals("Categoria do jogo esta errado.", "RPG", jogo1.getCategoria());
+
 	}
 	
 	@Test

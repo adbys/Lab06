@@ -6,10 +6,18 @@ public class Noob extends Usuario {
 		super(nome, login);
 	}
 	
-	public double compraJogo(Jogo jogo){
-		
-		double novoPreco = jogo.getPreco() - (jogo.getPreco() * 0.1);
-		return novoPreco;
+	public double getDesconto(double valor){
+		return valor - (valor * 0.1);
+	}
+	
+	public void compraJogo(Jogo jogo) throws Exception {
+		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
+			throw new Exception("Saldo Invalido");
+		} else {
+			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
+			this.setSaldo(novoSaldo);
+			this.adicionaJogo(jogo);
+		}
 		
 	}
 	

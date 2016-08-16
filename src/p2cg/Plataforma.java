@@ -24,5 +24,18 @@ public class Plataforma extends Jogo {
 		return x2p;
 		
 	}
+	
+	@Override
+	public String toString(){
+		String menssagem = "";
+		
+		menssagem += "+ " + this.getNome() + " - Plataforma: \n";
+		menssagem += "==> Jogou " + this.getJogadas() + "vez(es)\n";
+		menssagem += "==> Zerou " + this.getFinalizado()  + "vez(es)\n";
+		menssagem += "==> Maior score: " + this.getHighScore() + "\n";
+		
+		return menssagem;
+		
+	}
 
 }

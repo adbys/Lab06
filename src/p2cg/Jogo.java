@@ -82,10 +82,6 @@ public class Jogo {
 			throw new Exception("Nome nao pode ser nulo ou vazio.");
 		}
 		
-		if (categoria == null || categoria.equals("")){
-			throw new Exception("Categoria nao pode ser nula ou vazia."); 
-		}
-		
 		if (preco <= 0){
 			throw new Exception("Preco nao pode ser menor ou igual a zero.");
 		}
