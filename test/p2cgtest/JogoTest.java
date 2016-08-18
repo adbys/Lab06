@@ -1,5 +1,8 @@
 package p2cgtest;
 import p2cg.*;
+import p2cg.jogos.Jogo;
+import p2cg.jogos.Plataforma;
+import p2cg.jogos.Rpg;
 
 import static org.junit.Assert.*;
 
@@ -7,12 +10,11 @@ import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
-import p2cg.Jogo;
 
 public class JogoTest {
 	
-	private Jogo jogo1;
-	private Jogo jogo2;
+	private Rpg jogo1;
+	private Plataforma jogo2;
 	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
 
 	
@@ -20,7 +22,7 @@ public class JogoTest {
 	public void criaJogo(){
 		
 		try{
-			jogo1 = new Jogo("Pokemon", 10.2, jogabilidade);
+			jogo1 = new Rpg("Pokemon", 10.2, jogabilidade);
 		} catch (Exception e){
 			fail("Nao deveria lancar excecao");
 		}
@@ -32,31 +34,31 @@ public class JogoTest {
 	public void testConstrutor() {
 		
 		try{
-			jogo2 = new Jogo("Pokemon", 10.2, jogabilidade);
+			jogo2 = new Plataforma("Pokemon", 10.2, jogabilidade);
 		} catch (Exception e){
 			fail("Nao deveria lancar excecao");
 		}
 		
 		try{
-			jogo2 = new Jogo(null, 10.2, jogabilidade);
+			jogo2 = new Plataforma(null, 10.2, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
 		}
 		
 		try{
-			jogo2 = new Jogo("", 10.2, jogabilidade);
+			jogo2 = new Plataforma("", 10.2, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
 		}
 				
 		try{
-			jogo2 = new Jogo("Pokemon", 0.0, jogabilidade);
+			jogo2 = new Plataforma("Pokemon", 0.0, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
 		}
 		
 		try{
-			jogo2 = new Jogo("Pokemon", -1, jogabilidade);
+			jogo2 = new Plataforma("Pokemon", -1, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
 		}

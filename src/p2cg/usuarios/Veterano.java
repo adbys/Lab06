@@ -1,6 +1,10 @@
-package p2cg;
+package p2cg.usuarios;
+
+import p2cg.jogos.Jogo;
 
 public class Veterano extends Usuario {
+	
+	private final static double DESCONTO = 0.2; 
 	
 	public Veterano(String nome, String login) throws Exception {
 		super(nome, login);
@@ -8,7 +12,7 @@ public class Veterano extends Usuario {
 	}
 	
 	public double getDesconto(double valor){
-		return valor - (valor * 0.2);
+		return valor - (valor * this.DESCONTO);
 	}
 	
 	public void compraJogo(Jogo jogo) throws Exception {
@@ -28,6 +32,25 @@ public class Veterano extends Usuario {
 		
 		this.setX2p(pontuacao);
 		
+	}
+	
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof Veterano){
+			Veterano novoUsuario = (Veterano)objeto;
+			if (this.getNome().equals(novoUsuario.getNome())){
+				if (this.getLogin().equals(novoUsuario.getLogin())){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+			
+		} else {
+			return false;
+		}
 	}
 	
 	

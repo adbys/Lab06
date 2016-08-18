@@ -1,6 +1,8 @@
-package p2cg;
+package p2cg.jogos;
 
 import java.util.HashSet;
+
+import p2cg.Jogabilidade;
 
 public class Plataforma extends Jogo {
 	
@@ -36,6 +38,22 @@ public class Plataforma extends Jogo {
 		
 		return menssagem;
 		
+	}
+	
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof Plataforma){
+			Plataforma novoJogo = (Plataforma)objeto;
+			if (this.getNome().equals(novoJogo.getNome())){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+			
+
 	}
 
 }

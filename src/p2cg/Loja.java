@@ -1,18 +1,33 @@
 package p2cg;
 
 import java.util.HashMap;
+import java.util.HashSet;
+
+import p2cg.jogos.*;
+import p2cg.usuarios.*;
+
 
 public class Loja {
 	
 	private HashMap<String, Usuario> usuarios;
+	private HashSet<Jogo> jogos;
 	
 	public Loja(){
 		this.usuarios = new HashMap<String, Usuario>();
 	}
 	
-	public void adicionaUsuario(String login, String nome) throws Exception{
+	public void adicionaUsuarioNoob(String login, String nome) throws Exception{
 		if (!usuarios.containsKey(login)){
-			Usuario usuario = new Usuario(nome, login);
+			Noob usuario = new Noob(nome, login);
+			usuarios.put(login, usuario);
+		} else {
+			throw new Exception("Login ja existente.");
+		}
+	}
+	
+	public void adicionaUsuarioVeterano(String login, String nome) throws Exception{
+		if (!usuarios.containsKey(login)){
+			Veterano usuario = new Veterano(nome, login);
 			usuarios.put(login, usuario);
 		} else {
 			throw new Exception("Login ja existente.");
@@ -27,9 +42,15 @@ public class Loja {
 		}
 	}
 	
-	public void vendeJogo(Jogo jogo, String login) throws Exception {
+	public void vendeJogo(String nomeJogo, String login) throws Exception {
 		if (usuarios.containsKey(login)){
-			usuarios.get(login).compraJogo(jogo);
+			for (Jogo jogo : this.jogos){
+				if (nomeJogo.equalsIgnoreCase(jogo.getNome())){
+					this.usuarios.get(login).compraJogo(jogo);
+				}
+			}
+			throw new Exception("Jogo nao existe");
+			
 		} else {
 			throw new Exception("Nao foi possivel localizar login.");
 		}
@@ -62,5 +83,28 @@ public class Loja {
 		}
 		
 	}
+
+	public void criaJogoRpg(String nome, double preco, HashSet<Jogabilidade> jogabilidades) throws Exception{
+		
+		Rpg jogo = new Rpg(nome, preco, jogabilidades);
+		this.jogos.add(jogo);
+		
+	}
+	
+	public void criaJogoLuta(String nome, double preco, HashSet<Jogabilidade> jogabilidades) throws Exception{
+		
+		Luta jogo = new Luta(nome, preco, jogabilidades);
+		this.jogos.add(jogo);
+		
+	}
+	
+	public void criaJogoPlataforma(String nome, double preco, HashSet<Jogabilidade> jogabilidades) throws Exception{
+		
+		Plataforma jogo = new Plataforma(nome, preco, jogabilidades);
+		this.jogos.add(jogo);
+		
+	}
+		
+		
 	
 }

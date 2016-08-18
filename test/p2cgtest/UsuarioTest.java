@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import p2cg.Usuario;
-import p2cg.Noob;
-import p2cg.Veterano;
+import p2cg.usuarios.Noob;
+import p2cg.usuarios.Usuario;
+import p2cg.usuarios.Veterano;
 
 public class UsuarioTest {
-	
+
 	private Usuario usuario;
 	private Noob usuarioNoob;
 	private Veterano usuarioVeterano;

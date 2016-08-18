@@ -1,8 +1,10 @@
-package p2cg;
+package p2cg.jogos;
 
 import java.util.HashSet;
 
-public class Jogo {
+import p2cg.Jogabilidade;
+
+public abstract class Jogo {
 	
 	private String nome;
 	private double preco;
@@ -10,7 +12,7 @@ public class Jogo {
 	private int highScore;
 	private int jogadas;
 	private int finalizado;
-	private String categoria;
+
 	
 	
 	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade) throws Exception{
@@ -25,7 +27,7 @@ public class Jogo {
 		this.finalizado = 0;
 		
 	}
-
+	
 	public String getNome(){
 		return this.nome;
 	}
@@ -38,9 +40,6 @@ public class Jogo {
 		return this.jogabilidade;
 	}
 	
-	public String getCategoria(){
-		return this.categoria;
-	}
 	
 	public int getHighScore(){
 		return this.highScore;
@@ -62,19 +61,7 @@ public class Jogo {
 		this.finalizado++;
 	}
 		
-	public int registraJogada(int score, boolean zerou){
-		
-		if (zerou == true){
-			this.setFinalizado();
-		}
-		
-		if (this.getHighScore() < score){
-			this.setHighScore(score);
-		}
-		
-		return 0;
-		
-	}
+	public abstract int registraJogada(int score, boolean zerou);
 
 	private void testaConstrutor(String nome, double preco) throws Exception{
 		
@@ -100,4 +87,33 @@ public class Jogo {
 		
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof Jogo){
+			Jogo novoJogo = (Jogo)objeto;
+			if (this.getNome().equals(novoJogo.getNome())){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+			
+
+	}
+
+
+	
+		
+
+	
 }

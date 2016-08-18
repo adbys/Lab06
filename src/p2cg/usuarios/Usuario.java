@@ -1,8 +1,10 @@
-package p2cg;
+package p2cg.usuarios;
 
 import java.util.HashSet;
 
-public class Usuario {
+import p2cg.jogos.Jogo;
+
+public abstract class Usuario {
 	
 	private String nome;
 	private String login;
@@ -26,7 +28,7 @@ public class Usuario {
 		return this.x2p;
 	}
 	
-	protected void setX2p(int pontuacao){
+	public void setX2p(int pontuacao){
 		this.x2p += pontuacao;
 	}
 	
@@ -82,16 +84,11 @@ public class Usuario {
 		
 	}
 
-	public void compraJogo(Jogo jogo) throws Exception {
-		if (this.saldo < jogo.getPreco()){
-			throw new Exception("Saldo Invalido");
-		} else {
-			this.saldo = this.getSaldo() - jogo.getPreco();
-			this.adicionaJogo(jogo);
-		}
-		
-		
-	}
+	public abstract void compraJogo(Jogo jogo) throws Exception;
+	
+	public abstract void atualizaX2p(double precoDoJogo);
+	
+	public abstract double getDesconto(double valor);
 	
 	@Override
 	public String toString(){
@@ -112,5 +109,35 @@ public class Usuario {
 		return menssagem;
 		
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof Usuario){
+			Usuario novoUsuario = (Usuario)objeto;
+			if (this.getNome().equals(novoUsuario.getNome())){
+				if (this.getLogin().equals(novoUsuario.getLogin())){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+			
+		} else {
+			return false;
+		}
+	}
+	
+	
 	
 }
