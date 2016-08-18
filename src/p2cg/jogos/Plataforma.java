@@ -14,7 +14,7 @@ public class Plataforma extends Jogo {
 		
 		int x2p = 0;
 		
-		if (zerou == true){
+		if (zerou){
 			x2p = 20;
 			this.setFinalizado();
 		}

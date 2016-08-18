@@ -1,6 +1,6 @@
 package p2cgtest;
-import p2cg.*;
-import p2cg.jogos.Jogo;
+import p2cg.Jogabilidade;
+import p2cg.jogos.Luta;
 import p2cg.jogos.Plataforma;
 import p2cg.jogos.Rpg;
 
@@ -13,8 +13,9 @@ import org.junit.Test;
 
 public class JogoTest {
 	
-	private Rpg jogo1;
-	private Plataforma jogo2;
+	private Rpg pokemon;
+	private Plataforma mario;
+	private Luta injustice;
 	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
 
 	
@@ -22,7 +23,9 @@ public class JogoTest {
 	public void criaJogo(){
 		
 		try{
-			jogo1 = new Rpg("Pokemon", 10.2, jogabilidade);
+			pokemon = new Rpg("Pokemon", 10.2, jogabilidade);
+			mario = new Plataforma("Mario", 50.2, jogabilidade);
+			injustice = new Luta("injustice", 56.2, jogabilidade);
 		} catch (Exception e){
 			fail("Nao deveria lancar excecao");
 		}
@@ -34,59 +37,82 @@ public class JogoTest {
 	public void testConstrutor() {
 		
 		try{
-			jogo2 = new Plataforma("Pokemon", 10.2, jogabilidade);
+			mario = new Plataforma("Mario", 10.2, jogabilidade);
 		} catch (Exception e){
 			fail("Nao deveria lancar excecao");
 		}
 		
 		try{
-			jogo2 = new Plataforma(null, 10.2, jogabilidade);
+			mario = new Plataforma(null, 10.2, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
 		}
 		
 		try{
-			jogo2 = new Plataforma("", 10.2, jogabilidade);
+			mario = new Plataforma("", 10.2, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
 		}
 				
 		try{
-			jogo2 = new Plataforma("Pokemon", 0.0, jogabilidade);
+			mario = new Plataforma("Mario", 0.0, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
 		}
 		
 		try{
-			jogo2 = new Plataforma("Pokemon", -1, jogabilidade);
+			mario = new Plataforma("Mario", -1, jogabilidade);
 		} catch (Exception e){
 			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
 		}
 
 
 		
-		assertEquals("Nome do jogo esta errado.", "Pokemon", jogo1.getNome());
+		assertEquals("Nome do jogo esta errado.", "Mario", mario.getNome());
 
 	}
 	
 	@Test
-	public void testRegistraJogada(){
+	public void testRegistraJogadaRpg(){
 		
-		jogo1.registraJogada(900, true);
-		assertEquals("Quantidade de vezes finalizadas esta errada.", 1, jogo1.getFinalizado());
-		assertEquals("HighScore esta errado.", 900, jogo1.getHighScore());
+		assertEquals("Quantidade de x2p ganho esta errada.", 10, pokemon.registraJogada(900, true));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 1, pokemon.getFinalizado());
+		assertEquals("HighScore esta errado.", 900, pokemon.getHighScore());
 		
-		jogo1.registraJogada(800, true);
-		assertEquals("Quantidade de vezes finalizadas esta errada.", 2, jogo1.getFinalizado());
-		assertEquals("HighScore esta errado.", 900, jogo1.getHighScore());
+		assertEquals("Quantidade de x2p ganho esta errada.", 10, pokemon.registraJogada(900, true));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 2, pokemon.getFinalizado());
+		assertEquals("HighScore esta errado.", 900, pokemon.getHighScore());
 		
-		jogo1.registraJogada(800, false);
-		assertEquals("Quantidade de vezes finalizadas esta errada.", 2, jogo1.getFinalizado());
-		assertEquals("HighScore esta errado.", 900, jogo1.getHighScore());
+		assertEquals("Quantidade de x2p ganho esta errada.", 10,pokemon.registraJogada(800, false));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 2, pokemon.getFinalizado());
+		assertEquals("HighScore esta errado.", 900, pokemon.getHighScore());
 		
-		jogo1.registraJogada(1100, true);
-		assertEquals("Quantidade de vezes finalizadas esta errada.", 3, jogo1.getFinalizado());
-		assertEquals("HighScore esta errado.", 1100, jogo1.getHighScore());
+		assertEquals("Quantidade de x2p ganho esta errada.", 10,pokemon.registraJogada(1100, true));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 3, pokemon.getFinalizado());
+		assertEquals("HighScore esta errado.", 1100, pokemon.getHighScore());
 	}
+	
+	@Test
+	public void testRegistraJogadaLuta(){
+		
+		//TODO: terminar a implementação.
+		
+		assertEquals("Quantidade de x2p ganho esta errada.", 9, injustice.registraJogada(9000, true));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 1, injustice.getFinalizado());
+		assertEquals("HighScore esta errado.", 9000, injustice.getHighScore());
+		
+		assertEquals("Quantidade de x2p ganho esta errada.", 0, injustice.registraJogada(8000, true));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 2, injustice.getFinalizado());
+		assertEquals("HighScore esta errado.", 9000, injustice.getHighScore());
+		
+		assertEquals("Quantidade de x2p ganho esta errada.", 10, injustice.registraJogada(10000, false));
+		assertEquals("Quantidade de vezes finalizadas esta errada.", 2, injustice.getFinalizado());
+		assertEquals("HighScore esta errado.", 10000, injustice.getHighScore());
+		
+//		assertEquals("Quantidade de x2p ganho esta errada.", 10,pokemon.registraJogada(1100, true));
+//		assertEquals("Quantidade de vezes finalizadas esta errada.", 3, pokemon.getFinalizado());
+//		assertEquals("HighScore esta errado.", 1100, pokemon.getHighScore());
+	}
+
 
 }

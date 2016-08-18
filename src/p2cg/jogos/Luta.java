@@ -15,7 +15,7 @@ public class Luta extends Jogo {
 		
 		int x2p = 0;
 		
-		if (zerou == true){
+		if (zerou){
 			this.setFinalizado();
 		}
 		

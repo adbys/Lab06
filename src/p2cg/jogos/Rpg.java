@@ -14,7 +14,7 @@ public class Rpg extends Jogo {
 		
 		int x2p = 10;
 		
-		if (zerou == true){
+		if (zerou){
 			this.setFinalizado();
 		}
 		
