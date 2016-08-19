@@ -3,6 +3,7 @@ package p2cg.jogos;
 import java.util.HashSet;
 
 import p2cg.Jogabilidade;
+import p2cg.exceptions.PontuacaoInvalidaException;
 
 public class Luta extends Jogo {
 
@@ -11,9 +12,13 @@ public class Luta extends Jogo {
 		super(nome, preco, jogabilidade);
 	}
 	
+	public Luta(String nome, double preco) throws Exception {
+		super(nome, preco);
+	}
+	
 	public int registraJogada(int score, boolean zerou) throws Exception {
 		
-		this.testaPontuacaoNegativa(score);
+		this.testaPontuacaoInvalida(score);
 		
 		int x2p = 0;
 		
@@ -31,20 +36,12 @@ public class Luta extends Jogo {
 	}
 	
 	@Override
-	protected void testaPontuacaoNegativa(int pontuacao) throws Exception{
-		if (pontuacao < 0 || pontuacao > 100000){
-			throw new Exception("Pontuacao invalida");
-		}
-	}
-	
-
-	@Override
 	public String toString(){
 		String menssagem = "";
 		
 		menssagem += "+ " + this.getNome() + " - Luta: \n";
-		menssagem += "==> Jogou " + this.getJogadas() + "vez(es)\n";
-		menssagem += "==> Zerou " + this.getFinalizado()  + "vez(es)\n";
+		menssagem += "==> Jogou " + this.getJogadas() + " vez(es)\n";
+		menssagem += "==> Zerou " + this.getFinalizado()  + " vez(es)\n";
 		menssagem += "==> Maior score: " + this.getHighScore() + "\n";
 		
 		return menssagem;
@@ -52,19 +49,11 @@ public class Luta extends Jogo {
 	}
 	
 	@Override
-	public boolean equals(Object objeto) {
-		if (objeto instanceof Luta){
-			Luta novoJogo = (Luta)objeto;
-			if (this.getNome().equals(novoJogo.getNome())){
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-			
-
+	protected void testaPontuacaoInvalida(int pontuacao) throws Exception{
+		if (pontuacao < 0 || pontuacao > 100000){
+			throw new PontuacaoInvalidaException("Pontuacao invalida");
+		}
 	}
+	
 	
 }

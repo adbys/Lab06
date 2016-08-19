@@ -1,5 +1,8 @@
 package p2cg.usuarios;
 
+import java.util.HashSet;
+
+import p2cg.exceptions.SaldoInvalidoException;
 import p2cg.jogos.Jogo;
 
 public class Noob extends Usuario {
@@ -9,14 +12,10 @@ public class Noob extends Usuario {
 	public Noob(String nome, String login, double saldo) throws Exception {
 		super(nome, login, saldo);
 	}
-	
-	public double getDesconto(double valor){
-		return valor - (valor * this.DESCONTO);
-	}
-	
+		
 	public void compraJogo(Jogo jogo) throws Exception {
 		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
-			throw new Exception("Saldo Invalido");
+			throw new SaldoInvalidoException("Saldo Insuficiente");
 		} else {
 			this.atualizaX2p(jogo.getPreco());
 			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
@@ -34,5 +33,30 @@ public class Noob extends Usuario {
 		this.setX2p(pontuacao);
 		
 	}
+	
+	public double getDesconto(double valor){
+		return valor - (valor * this.DESCONTO);
+	}
+	
+	@Override
+	public String toString(){
+		String menssagem = this.getLogin() + "\n";
+		menssagem += this.getNome() + " - Jogador Noob \n";
+		menssagem += "Lista de Jogos:\n";
+		
+		double gastoTotal = 0;
+		
+		for (Jogo jogo : this.getJogosComprados()){
+			menssagem += jogo;
+			gastoTotal += jogo.getPreco();
+		}
+		
+		menssagem += "Total de preco dos jogos: R$ " + gastoTotal + "\n";
+		menssagem += "\n--------------------------------------------\n";
+	
+		return menssagem;
+		
+	}
+	
 	
 }

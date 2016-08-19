@@ -2,6 +2,8 @@ package p2cg.usuarios;
 
 import java.util.HashSet;
 
+import p2cg.exceptions.SaldoInvalidoException;
+import p2cg.exceptions.StringInvalidaException;
 import p2cg.jogos.Jogo;
 
 public abstract class Usuario {
@@ -24,17 +26,38 @@ public abstract class Usuario {
 		
 	}
 	
+	public abstract void compraJogo(Jogo jogo) throws Exception;
+	
+	public abstract void atualizaX2p(double precoDoJogo);
+	
+	public abstract double getDesconto(double valor);
+	
 	public int getX2p(){
 		return this.x2p;
 	}
-
 	
-	public void setX2p(int pontuacao){
-		this.x2p = pontuacao;
+	public void setX2p(int x2p){
+		this.x2p = x2p;
+	}
+	
+	public void ganhaX2p(int x2p){
+		this.x2p += x2p;
+	}
+
+	public HashSet<Jogo> getJogos(){
+		return this.jogosComprados;
+	}
+	
+	public void setJogos(HashSet<Jogo> jogos){
+		this.jogosComprados.addAll(jogos);
 	}
 	
 	public String getNome(){
 		return this.nome;
+	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
 	}
 	
 	public String getLogin(){
@@ -60,19 +83,7 @@ public abstract class Usuario {
 	public void adicionaDinheiro(double quantidade){
 		this.saldo += quantidade;
 	}
-	
-	private void testaConstrutor(String nome, double saldo) throws Exception {
-		
-		if (nome == null || "".equals(nome)){
-			throw new Exception("Nome nao pode ser nulo ou vazio.");
-		}
-		
-		if (saldo < 0){
-			throw new Exception("Saldo nao pode ser menor que zero");
-		}
-		
-	}
-	
+
 	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception{
 		
 		int x2p = 0; 
@@ -86,36 +97,6 @@ public abstract class Usuario {
 		}
 		
 		this.setX2p(x2p + this.getX2p());
-		
-	}
-	
-	public void transfereJogos(HashSet<Jogo> jogos){
-		this.jogosComprados.addAll(jogos);
-	}
-
-	public abstract void compraJogo(Jogo jogo) throws Exception;
-	
-	public abstract void atualizaX2p(double precoDoJogo);
-	
-	public abstract double getDesconto(double valor);
-	
-	@Override
-	public String toString(){
-		String menssagem = this.getLogin() + "\n";
-		menssagem += this.getNome() + " - Jogador \n";
-		menssagem += "Lista de Jogos:\n";
-		
-		double gastoTotal = 0;
-		
-		for (Jogo jogo : this.jogosComprados){
-			menssagem += jogo;
-			gastoTotal += jogo.getPreco();
-		}
-		
-		menssagem += "Total de preco dos jogos: R$ \n" + gastoTotal;
-		menssagem += "\n--------------------------------------------\n";
-	
-		return menssagem;
 		
 	}
 
@@ -147,6 +128,17 @@ public abstract class Usuario {
 		}
 	}
 	
+	private void testaConstrutor(String nome, double saldo) throws Exception {
+		
+		if (nome == null || "".equals(nome)){
+			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio.");
+		}
+		
+		if (saldo < 0){
+			throw new SaldoInvalidoException("Saldo nao pode ser menor que zero");
+		}
+		
+	}
 	
 	
 }

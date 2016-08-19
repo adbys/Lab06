@@ -118,7 +118,7 @@ public class UsuarioTest {
 		try{
 			usuarioVeterano.compraJogo(injustice);
 		} catch (Exception e){
-			assertEquals("Saldo Invalido", e.getMessage());
+			assertEquals("Saldo Insuficiente", e.getMessage());
 		}
 		
 		try{
