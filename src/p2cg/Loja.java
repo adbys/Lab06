@@ -16,18 +16,18 @@ public class Loja {
 		this.usuarios = new HashMap<String, Usuario>();
 	}
 	
-	public void adicionaUsuarioNoob(String login, String nome) throws Exception{
+	public void adicionaUsuarioNoob(String login, String nome, double saldo) throws Exception{
 		if (!usuarios.containsKey(login)){
-			Noob usuario = new Noob(nome, login);
+			Noob usuario = new Noob(nome, login, saldo);
 			usuarios.put(login, usuario);
 		} else {
 			throw new Exception("Login ja existente.");
 		}
 	}
 	
-	public void adicionaUsuarioVeterano(String login, String nome) throws Exception{
+	public void adicionaUsuarioVeterano(String login, String nome, double saldo) throws Exception{
 		if (!usuarios.containsKey(login)){
-			Veterano usuario = new Veterano(nome, login);
+			Veterano usuario = new Veterano(nome, login, saldo);
 			usuarios.put(login, usuario);
 		} else {
 			throw new Exception("Login ja existente.");
@@ -62,12 +62,14 @@ public class Loja {
 			if (usuario instanceof Noob){
 				if (usuario.getX2p() >= 1000){
 					String nome = usuario.getNome();
-					String novoLogin = login;
+					HashSet<Jogo> jogos = usuario.getJogosComprados();
 					int x2p = usuario.getX2p();
-				
+					double saldo = usuario.getSaldo();
 					usuarios.remove(login);
-					Veterano contaUpgrade = new Veterano(nome, novoLogin);
+					
+					Veterano contaUpgrade = new Veterano(nome, login, saldo);
 					contaUpgrade.setX2p(x2p);
+					contaUpgrade.transfereJogos(jogos);
 					
 					usuarios.put(login, contaUpgrade);
 				} else {

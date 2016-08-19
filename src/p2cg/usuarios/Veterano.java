@@ -6,8 +6,8 @@ public class Veterano extends Usuario {
 	
 	private final static double DESCONTO = 0.2; 
 	
-	public Veterano(String nome, String login) throws Exception {
-		super(nome, login);
+	public Veterano(String nome, String login, double saldo) throws Exception {
+		super(nome, login, saldo);
 		this.setX2p(1000);
 	}
 	
@@ -19,6 +19,7 @@ public class Veterano extends Usuario {
 		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
 			throw new Exception("Saldo Invalido");
 		} else {
+			this.atualizaX2p(jogo.getPreco());
 			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
 			this.setSaldo(novoSaldo);
 			this.adicionaJogo(jogo);
@@ -33,26 +34,6 @@ public class Veterano extends Usuario {
 		this.setX2p(pontuacao);
 		
 	}
-	
-	@Override
-	public boolean equals(Object objeto) {
-		if (objeto instanceof Veterano){
-			Veterano novoUsuario = (Veterano)objeto;
-			if (this.getNome().equals(novoUsuario.getNome())){
-				if (this.getLogin().equals(novoUsuario.getLogin())){
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-			
-		} else {
-			return false;
-		}
-	}
-	
 	
 
 }

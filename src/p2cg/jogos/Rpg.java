@@ -10,7 +10,9 @@ public class Rpg extends Jogo {
 		super(nome, preco, jogabilidade);
 	}
 	
-	public int registraJogada(int score, boolean zerou){
+	public int registraJogada(int score, boolean zerou) throws Exception{
+		
+		this.testaPontuacaoNegativa(score);
 		
 		int x2p = 10;
 		

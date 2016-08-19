@@ -60,8 +60,14 @@ public abstract class Jogo {
 	public void setFinalizado(){
 		this.finalizado++;
 	}
+	
+	protected void testaPontuacaoNegativa(int pontuacao) throws Exception{
+		if (pontuacao < 0){
+			throw new Exception("Pontuacao invalida");
+		}
+	}
 		
-	public abstract int registraJogada(int score, boolean zerou);
+	public abstract int registraJogada(int score, boolean zerou) throws Exception;
 
 	private void testaConstrutor(String nome, double preco) throws Exception{
 		

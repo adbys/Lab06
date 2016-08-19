@@ -12,13 +12,13 @@ public abstract class Usuario {
 	private double saldo;
 	private int x2p;
 	
-	public Usuario(String nome, String login) throws Exception {
+	public Usuario(String nome, String login, double saldo) throws Exception {
 		
-		this.testaConstrutor(nome);
+		this.testaConstrutor(nome, saldo);
 		
 		this.nome = nome;
 		this.login = login;
-		this.saldo = 0.0;
+		this.saldo = saldo;
 		this.jogosComprados = new HashSet<Jogo>();
 		this.x2p = 0;
 		
@@ -27,9 +27,10 @@ public abstract class Usuario {
 	public int getX2p(){
 		return this.x2p;
 	}
+
 	
 	public void setX2p(int pontuacao){
-		this.x2p += pontuacao;
+		this.x2p = pontuacao;
 	}
 	
 	public String getNome(){
@@ -44,7 +45,7 @@ public abstract class Usuario {
 		return this.saldo;
 	}
 	
-	protected void setSaldo(double saldo){
+	public void setSaldo(double saldo){
 		this.saldo = saldo;
 	}
 	
@@ -57,18 +58,22 @@ public abstract class Usuario {
 	}
 	
 	public void adicionaDinheiro(double quantidade){
-		this.saldo =+ quantidade;
+		this.saldo += quantidade;
 	}
 	
-	private void testaConstrutor(String nome) throws Exception {
+	private void testaConstrutor(String nome, double saldo) throws Exception {
 		
 		if (nome == null || "".equals(nome)){
 			throw new Exception("Nome nao pode ser nulo ou vazio.");
 		}
 		
+		if (saldo < 0){
+			throw new Exception("Saldo nao pode ser menor que zero");
+		}
+		
 	}
 	
-	public void registraJogada(String nomeDoJogo, int score, boolean zerou){
+	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception{
 		
 		int x2p = 0; 
 		
@@ -80,8 +85,12 @@ public abstract class Usuario {
 			
 		}
 		
-		this.setX2p(x2p);
+		this.setX2p(x2p + this.getX2p());
 		
+	}
+	
+	public void transfereJogos(HashSet<Jogo> jogos){
+		this.jogosComprados.addAll(jogos);
 	}
 
 	public abstract void compraJogo(Jogo jogo) throws Exception;

@@ -6,8 +6,8 @@ public class Noob extends Usuario {
 	
 	private final static double DESCONTO = 0.1;
 
-	public Noob(String nome, String login) throws Exception {
-		super(nome, login);
+	public Noob(String nome, String login, double saldo) throws Exception {
+		super(nome, login, saldo);
 	}
 	
 	public double getDesconto(double valor){
@@ -18,6 +18,7 @@ public class Noob extends Usuario {
 		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
 			throw new Exception("Saldo Invalido");
 		} else {
+			this.atualizaX2p(jogo.getPreco());
 			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
 			this.setSaldo(novoSaldo);
 			this.adicionaJogo(jogo);
@@ -27,31 +28,11 @@ public class Noob extends Usuario {
 	
 	public void atualizaX2p(double precoDoJogo){
 		
-		int pontuacao = (int)(this.getX2p() + precoDoJogo * 10);
+		int pontuacao = (int)(precoDoJogo * 10);
+		pontuacao += this.getX2p();
 		
 		this.setX2p(pontuacao);
 		
 	}
 	
-	@Override
-	public boolean equals(Object objeto) {
-		if (objeto instanceof Noob){
-			Noob novoUsuario = (Noob)objeto;
-			if (this.getNome().equals(novoUsuario.getNome())){
-				if (this.getLogin().equals(novoUsuario.getLogin())){
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-			
-		} else {
-			return false;
-		}
-	}
-	
-	
-
 }

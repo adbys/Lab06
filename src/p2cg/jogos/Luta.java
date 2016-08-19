@@ -11,7 +11,9 @@ public class Luta extends Jogo {
 		super(nome, preco, jogabilidade);
 	}
 	
-	public int registraJogada(int score, boolean zerou){
+	public int registraJogada(int score, boolean zerou) throws Exception {
+		
+		this.testaPontuacaoNegativa(score);
 		
 		int x2p = 0;
 		
@@ -27,6 +29,14 @@ public class Luta extends Jogo {
 		return x2p;
 		
 	}
+	
+	@Override
+	protected void testaPontuacaoNegativa(int pontuacao) throws Exception{
+		if (pontuacao < 0 || pontuacao > 100000){
+			throw new Exception("Pontuacao invalida");
+		}
+	}
+	
 
 	@Override
 	public String toString(){
