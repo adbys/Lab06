@@ -1,3 +1,4 @@
+//Adbys José Vasconcelos de Andrade - 116110498
 package p2cg;
 
 import java.util.HashMap;
@@ -13,7 +14,6 @@ import p2cg.exceptions.TipoUsuarioException;
 import p2cg.jogos.*;
 import p2cg.usuarios.*;
 
-//TODO: ToString
 
 public class Loja {
 	
@@ -23,6 +23,14 @@ public class Loja {
 	public Loja(){
 		this.usuarios = new HashMap<String, Usuario>();
 		this.jogos = new HashSet<Jogo>();
+	}
+	
+	public void adicionaUsuario(Usuario usuario) throws Exception{
+		if (!usuarios.containsKey(usuario.getLogin())){
+			usuarios.put(usuario.getLogin(), usuario);
+		} else {
+			throw new LoginInvalidoException("Login ja existente.");
+		}
 	}
 		
 	/**
@@ -51,6 +59,8 @@ public class Loja {
 			throw new LoginInvalidoException("Login ja existente.");
 		}
 	}
+
+
 	
 	public Usuario getUsuario(String login) throws Exception{
 		if (!usuarios.containsKey(login)){

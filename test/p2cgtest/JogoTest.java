@@ -1,3 +1,4 @@
+//Adbys José Vasconcelos de Andrade - 116110498
 package p2cgtest;
 
 import p2cg.Jogabilidade;
@@ -166,7 +167,7 @@ public class JogoTest {
 		try{
 			mario.registraJogada(-1, false);
 		} catch (Exception e){
-			assertEquals("Mensagem de pontuacao invalida errada", "Pontuacao invalida", e.getMessage());
+			assertEquals("Mensagem de pontuacao invalida errada.", "Pontuacao invalida", e.getMessage());
 		}
 	}
 
