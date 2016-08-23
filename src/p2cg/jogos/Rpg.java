@@ -37,7 +37,7 @@ public class Rpg extends Jogo {
 	public String toString(){
 		String menssagem = "";
 		
-		menssagem += "+ " + this.getNome() + " - RPG: \n";
+		menssagem += "+ " + this.getNome() + " - RPG:\n";
 		menssagem += "==> Jogou " + this.getJogadas() + " vez(es)\n";
 		menssagem += "==> Zerou " + this.getFinalizado()  + " vez(es)\n";
 		menssagem += "==> Maior score: " + this.getHighScore() + "\n";

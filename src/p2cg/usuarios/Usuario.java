@@ -27,11 +27,22 @@ public abstract class Usuario {
 		
 	}
 	
-	public abstract void compraJogo(Jogo jogo) throws Exception;
-	
 	public abstract void atualizaX2p(double precoDoJogo);
 	
 	public abstract double getDesconto(double valor);
+	
+	
+	public void compraJogo(Jogo jogo) throws Exception {
+		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
+			throw new SaldoInvalidoException("Saldo Insuficiente");
+		} else {
+			this.atualizaX2p(jogo.getPreco());
+			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
+			this.setSaldo(novoSaldo);
+			this.adicionaJogo(jogo);
+		}
+		
+	}
 	
 	public int getX2p(){
 		return this.x2p;
@@ -129,7 +140,7 @@ public abstract class Usuario {
 		}
 	}
 	
-	private void testaConstrutor(String nome, double saldo) throws Exception {
+	protected void testaConstrutor(String nome, double saldo) throws Exception {
 		
 		if (nome == null || "".equals(nome)){
 			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio.");

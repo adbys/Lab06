@@ -19,6 +19,7 @@ public class JogoTest {
 	private Rpg pokemon;
 	private Plataforma mario;
 	private Luta injustice;
+	private JogoSupport jogo;
 	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
 
 	@Before
@@ -30,7 +31,8 @@ public class JogoTest {
 		try {
 			pokemon = new Rpg("Pokemon", 10.2, jogabilidade);
 			mario = new Plataforma("Mario", 50.2, jogabilidade);
-			injustice = new Luta("injustice", 56.2, jogabilidade);
+			injustice = new Luta("Injustice", 56.2, jogabilidade);
+			jogo = new JogoSupport("Jogo", 58.2, jogabilidade);
 		} catch (Exception e) {
 			fail("Nao deveria lancar excecao");
 		}
@@ -39,12 +41,6 @@ public class JogoTest {
 
 	@Test
 	public void testConstrutor() {
-
-		try {
-			mario = new Plataforma("Mario", 10.2, jogabilidade);
-		} catch (Exception e) {
-			fail("Nao deveria lancar excecao");
-		}
 
 		try {
 			mario = new Plataforma(null, 10.2, jogabilidade);
@@ -71,6 +67,84 @@ public class JogoTest {
 		}
 
 		assertEquals("Nome do jogo esta errado.", "Mario", mario.getNome());
+		
+		try {
+			pokemon = new Rpg(null, 10.2, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+
+		try {
+			pokemon = new Rpg("", 10.2, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+
+		try {
+			pokemon = new Rpg("Pokemon", 0.0, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
+		}
+
+		try {
+			pokemon = new Rpg("Pokemon", -1, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
+		}
+
+		assertEquals("Nome do jogo esta errado.", "Pokemon", pokemon.getNome());
+		
+		try {
+			injustice = new Luta(null, 10.2, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+
+		try {
+			injustice = new Luta("", 10.2, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+
+		try {
+			injustice = new Luta("Injustice", 0.0, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
+		}
+
+		try {
+			injustice = new Luta("Injustice", -1, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
+		}
+
+		assertEquals("Nome do jogo esta errado.", "Injustice", injustice.getNome());
+		
+		try {
+			jogo = new JogoSupport(null, 10.2, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+
+		try {
+			jogo = new JogoSupport("", 10.2, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+
+		try {
+			jogo = new JogoSupport("Jogo", 0.0, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
+		}
+
+		try {
+			jogo = new JogoSupport("Jogo", -1, jogabilidade);
+		} catch (Exception e) {
+			assertEquals("Preco nao pode ser menor ou igual a zero.", e.getMessage());
+		}
+
+		assertEquals("Nome do jogo esta errado.", "Jogo", jogo.getNome());
 
 	}
 

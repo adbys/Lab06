@@ -21,6 +21,8 @@ public class ToStringUsuarioEJogoTest {
 	private Luta luta;
 	private Plataforma plataforma;
 	private Rpg rpg;
+	private String noobExpected = "";
+	private String veteranoExpected = "";
 	
 	@Before
 	public void criaObjetos(){
@@ -34,6 +36,19 @@ public class ToStringUsuarioEJogoTest {
 			System.out.println(e.getMessage());
 			fail("Nao deveria lancar excecao");
 		}
+		
+		noobExpected += "noob\nNoob - Jogador Noob\nLista de Jogos:\n";
+		noobExpected += "+ Luta - Luta:\n==> Jogou 0 vez(es)\n==> Zerou 3 vez(es)\n==> Maior score: 5000\n";
+		noobExpected += "+ Plataforma - Plataforma:\n==> Jogou 0 vez(es)\n==> Zerou 2 vez(es)\n==> Maior score: 5000\n";
+		noobExpected += "+ Rpg - RPG:\n==> Jogou 0 vez(es)\n==> Zerou 1 vez(es)\n==> Maior score: 5000\n";
+		noobExpected += "Total de preco dos jogos: R$ 30.0\n\n--------------------------------------------\n";
+		
+		veteranoExpected += "veterano\nVeterano - Jogador Veterano\nLista de Jogos:\n";
+		veteranoExpected += "+ Luta - Luta:\n==> Jogou 0 vez(es)\n==> Zerou 3 vez(es)\n==> Maior score: 5000\n";
+		veteranoExpected += "+ Plataforma - Plataforma:\n==> Jogou 0 vez(es)\n==> Zerou 2 vez(es)\n==> Maior score: 5000\n";
+		veteranoExpected += "+ Rpg - RPG:\n==> Jogou 0 vez(es)\n==> Zerou 1 vez(es)\n==> Maior score: 5000\n";
+		veteranoExpected += "Total de preco dos jogos: R$ 30.0\n\n--------------------------------------------\n";
+
 	}
 	
 	@Test
@@ -61,6 +76,10 @@ public class ToStringUsuarioEJogoTest {
 			fail("Nao deveria lancar excecao");
 		}
 		
+
+		assertEquals("ToString esta errado", noobExpected, noob.toString());
+		assertEquals("ToString esta errado", veteranoExpected, veterano.toString());
+
 
 
 	}

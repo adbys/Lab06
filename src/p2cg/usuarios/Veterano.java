@@ -14,19 +14,7 @@ public class Veterano extends Usuario {
 		super(nome, login, saldo);
 		this.setX2p(1000);
 	}
-	
-	public void compraJogo(Jogo jogo) throws Exception {
-		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
-			throw new SaldoInvalidoException("Saldo Insuficiente");
-		} else {
-			this.atualizaX2p(jogo.getPreco());
-			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
-			this.setSaldo(novoSaldo);
-			this.adicionaJogo(jogo);
-		}
 		
-	}
-	
 	public void atualizaX2p(double precoDoJogo){
 		
 		int pontuacao = (int)(this.getX2p() + precoDoJogo * 15);
@@ -42,7 +30,7 @@ public class Veterano extends Usuario {
 	@Override
 	public String toString(){
 		String menssagem = this.getLogin() + "\n";
-		menssagem += this.getNome() + " - Jogador Veterano \n";
+		menssagem += this.getNome() + " - Jogador Veterano\n";
 		menssagem += "Lista de Jogos:\n";
 		
 		double gastoTotal = 0;

@@ -40,7 +40,7 @@ public class Luta extends Jogo {
 	public String toString(){
 		String menssagem = "";
 		
-		menssagem += "+ " + this.getNome() + " - Luta: \n";
+		menssagem += "+ " + this.getNome() + " - Luta:\n";
 		menssagem += "==> Jogou " + this.getJogadas() + " vez(es)\n";
 		menssagem += "==> Zerou " + this.getFinalizado()  + " vez(es)\n";
 		menssagem += "==> Maior score: " + this.getHighScore() + "\n";

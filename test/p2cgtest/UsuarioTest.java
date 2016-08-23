@@ -19,6 +19,7 @@ import p2cg.usuarios.Veterano;
 public class UsuarioTest {
 	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
 	
+	private UsuarioSupport usuario;
 	private Noob usuarioNoob;
 	private Veterano usuarioVeterano;
 	private Rpg pokemon;
@@ -32,6 +33,7 @@ public class UsuarioTest {
 		try{
 			usuarioNoob = new Noob("Jose", "jose", 25);
 			usuarioVeterano = new Veterano("Joao", "joao", 10);
+			usuario = new UsuarioSupport("Joaquim", "joaquim", 10);
 		} catch (Exception e){
 			fail("Nao deveria lancar excecao");
 		}
@@ -78,6 +80,12 @@ public class UsuarioTest {
 		}
 		
 		try{
+			usuarioVeterano = new Veterano("Jose", "jose", -1);
+		} catch (Exception e) {
+			assertEquals("Saldo nao pode ser menor que zero", e.getMessage());
+		}
+		
+		try{
 			usuarioVeterano = new Veterano("", "jose", 0);
 		} catch (Exception e) {
 			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
@@ -88,6 +96,28 @@ public class UsuarioTest {
 		} catch (Exception e) {
 			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
 		}
+		
+		try{
+			usuario = new UsuarioSupport("Joaquim", "joaquim", -1);
+		} catch (Exception e) {
+			assertEquals("Saldo nao pode ser menor que zero", e.getMessage());
+		}
+		
+		try{
+			usuario = new UsuarioSupport("", "joaquim", 0);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+		
+		try{
+			usuario = new UsuarioSupport(null, "joaquim", 0);
+		} catch (Exception e) {
+			assertEquals("Nome nao pode ser nulo ou vazio.", e.getMessage());
+		}
+		
+		assertEquals("Nome do usuario esta errado", "Joao", usuarioVeterano.getNome());
+		assertEquals("Nome do usuario esta errado", "Jose", usuarioNoob.getNome());
+		assertEquals("Nome do usuario esta errado", "Joaquim", usuario.getNome());
 	}
 
 	

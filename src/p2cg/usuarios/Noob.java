@@ -13,18 +13,6 @@ public class Noob extends Usuario {
 	public Noob(String nome, String login, double saldo) throws Exception {
 		super(nome, login, saldo);
 	}
-		
-	public void compraJogo(Jogo jogo) throws Exception {
-		if (this.getSaldo() < this.getDesconto(jogo.getPreco())){
-			throw new SaldoInvalidoException("Saldo Insuficiente");
-		} else {
-			this.atualizaX2p(jogo.getPreco());
-			double novoSaldo = this.getSaldo() - this.getDesconto(jogo.getPreco());
-			this.setSaldo(novoSaldo);
-			this.adicionaJogo(jogo);
-		}
-		
-	}
 	
 	public void atualizaX2p(double precoDoJogo){
 		
@@ -42,7 +30,7 @@ public class Noob extends Usuario {
 	@Override
 	public String toString(){
 		String menssagem = this.getLogin() + "\n";
-		menssagem += this.getNome() + " - Jogador Noob \n";
+		menssagem += this.getNome() + " - Jogador Noob\n";
 		menssagem += "Lista de Jogos:\n";
 		
 		double gastoTotal = 0;
